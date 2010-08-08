@@ -2,8 +2,7 @@
 //  animationAppDelegate.h
 //  animation
 //
-//  Created by Avi Itskovich on 10-08-08.
-//  Copyright Bloq Software 2010. All rights reserved.
+//  Created by Avi Itskovich on 10-08-07.
 //
 
 #import <UIKit/UIKit.h>

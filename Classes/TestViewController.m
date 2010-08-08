@@ -2,8 +2,14 @@
 //  TestViewController.m
 //  animation
 //
-//  Created by Avi Itskovich on 10-08-08.
-//  Copyright 2010 Bloq Software. All rights reserved.
+//  Created by Avi Itskovich on 10-08-07.
+//  Copyright 2010 Avi Itskovich. All rights reserved.
+//
+//  Permission is given to use this source code file without charge in any
+//  project, commercial or otherwise, entirely at your risk, with the condition
+//  that any redistribution (in part or whole) of source code must retain
+//  this copyright and permission notice. Attribution in compiled projects is
+//  appreciated but not required.
 //
 
 #import "TestViewController.h"
@@ -19,6 +25,8 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	// EXAMPLE: Queuing Animations
 	
 	// Add a label that will be moved for testing
 	label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 40)];

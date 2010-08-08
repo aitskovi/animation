@@ -41,7 +41,6 @@
 		FDA28168120F2CC10039A8CD /* AIAnimationObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIAnimationObject.m; sourceTree = "<group>"; };
 		FDA28169120F2CC10039A8CD /* AIAnimationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIAnimationQueue.h; sourceTree = "<group>"; };
 		FDA2816A120F2CC10039A8CD /* AIAnimationQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIAnimationQueue.m; sourceTree = "<group>"; };
-		FDA2816D120F2CE20039A8CD /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
 		FDA28170120F2D2D0039A8CD /* AISingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AISingleton.h; sourceTree = "<group>"; };
 		FDA28171120F2D2D0039A8CD /* AISingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AISingleton.m; sourceTree = "<group>"; };
 		FDA2819E120F2E1A0039A8CD /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
@@ -111,7 +110,6 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				FDA2816D120F2CE20039A8CD /* SynthesizeSingleton.h */,
 				32CA4F630368D1EE00C91783 /* animation_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
