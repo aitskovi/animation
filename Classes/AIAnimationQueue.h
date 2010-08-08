@@ -14,7 +14,8 @@
 
 #import <Foundation/Foundation.h>
 #import "AISingleton.h"
-#import "AIAnimationObject.h"
+#import "AISelectorAnimationObject.h"
+#import "AIBlockAnimationObject.h"
 
 @interface AIAnimationQueue : AISingleton <AIAnimationObjectDelegate> {
 	NSMutableArray *queue;
@@ -26,6 +27,7 @@
 // Selector is the selector for the lies wrapping the animation
 // Target is the object in which that method lies
 - (void)addAnimation:(SEL)selector target:(id)target;
+- (void)addAnimation:(void (^)(void))animation;
 
 - (void)nextAnimation;
 

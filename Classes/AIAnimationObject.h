@@ -24,14 +24,9 @@
 
 @interface AIAnimationObject : NSObject {
 	id <AIAnimationObjectDelegate> delegate;
-	SEL selector;
-	id target;
 }
 
 @property (nonatomic, assign) id delegate;
-@property (nonatomic, retain) id target;
-@property (nonatomic) SEL selector;
 
-- (id)initWithTarget:(id)animationTarget selector:(SEL)animationSelector;
 - (void)play;
 @end

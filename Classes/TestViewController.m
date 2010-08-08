@@ -32,12 +32,24 @@
 	label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 40)];
 	label.text = @"Test";
 	[self.view addSubview:label];
-
+	
+	/*
 	AIAnimationQueue *animationQueue = [AIAnimationQueue sharedInstance];
 	[animationQueue addAnimation:@selector(moveDown) target:self];
 	[animationQueue addAnimation:@selector(moveRight) target:self];
 	[animationQueue addAnimation:@selector(moveUp) target:self];
 	[animationQueue addAnimation:@selector(moveLeft) target:self];
+	 */
+	
+	AIAnimationQueue *animationQueue = [AIAnimationQueue sharedInstance];
+	[animationQueue addAnimation:^{ [UIView setAnimationDuration:2.0];
+		label.frame = CGRectMake(0, 400, 100, 40); }];
+	[animationQueue addAnimation:^{ [UIView setAnimationDuration:2.0];
+		label.frame = CGRectMake(220, 400, 100, 40); }];
+	[animationQueue addAnimation:^{ [UIView setAnimationDuration:2.0];
+		label.frame = CGRectMake(220, 0, 100, 40); }];
+	[animationQueue addAnimation:^{ [UIView setAnimationDuration:2.0];
+	 label.frame = CGRectMake(220, 0, 100, 40); }];
 }
 
 - (void)moveDown {

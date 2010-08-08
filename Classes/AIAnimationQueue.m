@@ -28,7 +28,17 @@
 }
 
 - (void)addAnimation:(SEL)selector target:(id)target {
-	AIAnimationObject *aObject = [[AIAnimationObject alloc] initWithTarget:target selector:selector];
+	AISelectorAnimationObject *aObject = [[AISelectorAnimationObject alloc] initWithTarget:target selector:selector];
+	aObject.delegate = self;
+	[queue addObject:aObject];
+	[aObject release];
+	if (!animating) {
+		[self nextAnimation];
+	}
+}
+
+- (void)addAnimation:(void (^)(void))animation {
+	AIBlockAnimationObject *aObject = [[AIBlockAnimationObject alloc] initWithBlock:animation];
 	aObject.delegate = self;
 	[queue addObject:aObject];
 	[aObject release];
