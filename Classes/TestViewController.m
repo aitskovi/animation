@@ -50,6 +50,7 @@
 	[animationQueue addAnimation:@selector(moveLeft) target:self continuation:@selector(leftContinuation) continuationTarget:self];
 	[animationQueue addAnimation:@selector(samePlace) target:self continuation:@selector(samePlaceContinuation) continuationTarget:self];
 	
+	
 	// Animations with Blocks (iOS 4.0 +)
 	[animationQueue addAnimation:^{ 
 		[UIView setAnimationDuration:2.0];
@@ -103,6 +104,7 @@
 	} continuation:^{ 
 		NSLog(@"Done 5"); 
 	}];
+	
 }
 
 - (void)moveDown {

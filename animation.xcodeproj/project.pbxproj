@@ -303,6 +303,7 @@
 				GCC_PREFIX_HEADER = animation_Prefix.pch;
 				INFOPLIST_FILE = "animation-Info.plist";
 				PRODUCT_NAME = animation;
+				SDKROOT = iphoneos4.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -355,6 +356,7 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				PREBINDING = NO;
 				PRODUCT_NAME = animationQueue;
+				SDKROOT = iphoneos3.2;
 				ZERO_LINK = NO;
 			};
 			name = Release;

@@ -8,7 +8,6 @@
 
 #import "AISelectorAnimationObject.h"
 
-
 @implementation AISelectorAnimationObject
 
 @synthesize target;
@@ -55,6 +54,8 @@
 - (void)dealloc {
 	self.target = nil;
 	self.selector = nil;
+	self.cTarget = nil;
+	self.cSelector = nil;
 	[super dealloc];
 }
 

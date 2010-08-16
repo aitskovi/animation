@@ -12,7 +12,7 @@
 //  appreciated but not required.
 //
 #import "AIAnimationObject.h"
-
+#import <UIKit/UIKit.h>
 
 @implementation AIAnimationObject
 

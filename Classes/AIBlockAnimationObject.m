@@ -8,7 +8,6 @@
 
 #import "AIBlockAnimationObject.h"
 
-
 @implementation AIBlockAnimationObject
 
 - (id)initWithBlock:(void (^)(void))animationBlock {
@@ -46,6 +45,7 @@
 
 - (void)dealloc {
 	[animation release];
+	[continuation release];
 	[super dealloc];
 }
 @end
