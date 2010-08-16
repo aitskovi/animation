@@ -33,23 +33,28 @@
 	label.text = @"Test";
 	[self.view addSubview:label];
 	
-	/*
+	// Animations with Selectors (iOS 3.2 and lower)
 	AIAnimationQueue *animationQueue = [AIAnimationQueue sharedInstance];
 	[animationQueue addAnimation:@selector(moveDown) target:self];
 	[animationQueue addAnimation:@selector(moveRight) target:self];
 	[animationQueue addAnimation:@selector(moveUp) target:self];
 	[animationQueue addAnimation:@selector(moveLeft) target:self];
-	 */
 	
-	AIAnimationQueue *animationQueue = [AIAnimationQueue sharedInstance];
+	// Animations with Blocks (iOS 4.0 +)
+	[animationQueue addAnimation:^{ [UIView setAnimationDuration:2.0];
+		label.frame = CGRectMake(0, 400, 100, 40); }];
+	[animationQueue addAnimation:^{ [UIView setAnimationDuration:2.0];
+		label.frame = CGRectMake(220, 400, 100, 40); }];
+	[animationQueue addAnimation:^{ [UIView setAnimationDuration:2.0];
+		label.frame = CGRectMake(220, 0, 100, 40); }];
+	
+	// Animations with Blocks and Continuations (iOS 4.0 +)
 	[animationQueue addAnimation:^{ [UIView setAnimationDuration:2.0];
 		label.frame = CGRectMake(0, 400, 100, 40); } continuation:^{NSLog(@"Done 1");}];
 	[animationQueue addAnimation:^{ [UIView setAnimationDuration:2.0];
 		label.frame = CGRectMake(220, 400, 100, 40); } continuation:^{NSLog(@"Done 2");}];
 	[animationQueue addAnimation:^{ [UIView setAnimationDuration:2.0];
 		label.frame = CGRectMake(220, 0, 100, 40); } continuation:^{NSLog(@"Done 3");}];
-	/*[animationQueue addAnimation:^{ [UIView setAnimationDuration:2.0];
-		label.frame = CGRectMake(220, 0, 100, 40); } continuation:^{NSLog(@"Done 4");}];*/
 }
 
 - (void)moveDown {
