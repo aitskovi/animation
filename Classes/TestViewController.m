@@ -43,13 +43,13 @@
 	
 	AIAnimationQueue *animationQueue = [AIAnimationQueue sharedInstance];
 	[animationQueue addAnimation:^{ [UIView setAnimationDuration:2.0];
-		label.frame = CGRectMake(0, 400, 100, 40); }];
+		label.frame = CGRectMake(0, 400, 100, 40); } continuation:^{NSLog(@"Done 1");}];
 	[animationQueue addAnimation:^{ [UIView setAnimationDuration:2.0];
-		label.frame = CGRectMake(220, 400, 100, 40); }];
+		label.frame = CGRectMake(220, 400, 100, 40); } continuation:^{NSLog(@"Done 2");}];
 	[animationQueue addAnimation:^{ [UIView setAnimationDuration:2.0];
-		label.frame = CGRectMake(220, 0, 100, 40); }];
-	[animationQueue addAnimation:^{ [UIView setAnimationDuration:2.0];
-	 label.frame = CGRectMake(220, 0, 100, 40); }];
+		label.frame = CGRectMake(220, 0, 100, 40); } continuation:^{NSLog(@"Done 3");}];
+	/*[animationQueue addAnimation:^{ [UIView setAnimationDuration:2.0];
+		label.frame = CGRectMake(220, 0, 100, 40); } continuation:^{NSLog(@"Done 4");}];*/
 }
 
 - (void)moveDown {
@@ -71,15 +71,6 @@
 	[UIView setAnimationDuration:2.0];
 	label.frame = CGRectMake(220, 0, 100, 40);
 }
-
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.

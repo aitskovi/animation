@@ -24,10 +24,14 @@
 
 + (AIAnimationQueue *)sharedInstance;
 
+// Selector based animations
 // Selector is the selector for the lies wrapping the animation
 // Target is the object in which that method lies
 - (void)addAnimation:(SEL)selector target:(id)target;
+
+// Block based animations
 - (void)addAnimation:(void (^)(void))animation;
+- (void)addAnimation:(void (^)())animation continuation:(void (^)())continuation;
 
 - (void)nextAnimation;
 

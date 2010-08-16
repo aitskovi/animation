@@ -11,8 +11,10 @@
 
 @interface AIBlockAnimationObject : AIAnimationObject {
 	void(^animation)(void);
+	void(^continuation)(void);
 }
 
 - (id)initWithBlock:(void (^)(void))animationBlock;
+- (id)initWithBlock:(void (^)())animationBlock continuation:(void (^)())continuationBlock;
 
 @end

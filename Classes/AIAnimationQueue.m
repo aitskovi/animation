@@ -27,6 +27,9 @@
 	return self;
 }
 
+#pragma mark -
+#pragma mark Selector Animations
+
 - (void)addAnimation:(SEL)selector target:(id)target {
 	AISelectorAnimationObject *aObject = [[AISelectorAnimationObject alloc] initWithTarget:target selector:selector];
 	aObject.delegate = self;
@@ -36,6 +39,9 @@
 		[self nextAnimation];
 	}
 }
+
+#pragma mark -
+#pragma mark Block Animations
 
 - (void)addAnimation:(void (^)(void))animation {
 	AIBlockAnimationObject *aObject = [[AIBlockAnimationObject alloc] initWithBlock:animation];
@@ -47,15 +53,28 @@
 	}
 }
 
+- (void)addAnimation:(void (^)())animation continuation:(void (^)())continuation {
+	AIBlockAnimationObject *aObject = [[AIBlockAnimationObject alloc] initWithBlock:animation continuation:continuation];
+	aObject.delegate = self;
+	[queue addObject:aObject];
+	[aObject release];
+	if (!animating) {
+		[self nextAnimation];
+	}
+}
+
+#pragma mark -
+#pragma mark Queue Management
+
 - (void)nextAnimation {
 	if ([queue count] > 0) {
-		AIAnimationObject *animation = [[[queue lastObject] retain] autorelease];
+		AIAnimationObject *animation = [[[queue objectAtIndex:0] retain] autorelease];
 		
 		// Set boolean and remove before playing because animations where nothing happens
 		// occur instantaneously causing an infinited loop if these are set after play
 		// is called
 		animating = TRUE;
-		[queue removeLastObject];
+		[queue removeObjectAtIndex:0];
 		
 		[animation play];
 		return;
