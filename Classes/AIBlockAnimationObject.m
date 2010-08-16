@@ -36,7 +36,6 @@
 - (void)animationEnded {
 	// Blocks can't be nil
 	if (continuation != nil) {
-		NSLog(@"Continuation");
 		continuation();
 	}
 	

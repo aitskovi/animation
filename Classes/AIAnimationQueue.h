@@ -28,6 +28,7 @@
 // Selector is the selector for the lies wrapping the animation
 // Target is the object in which that method lies
 - (void)addAnimation:(SEL)selector target:(id)target;
+- (void)addAnimation:(SEL)selector target:(id)target continuation:(SEL)cSelector continuationTarget:(id)cTarget;
 
 // Block based animations
 - (void)addAnimation:(void (^)(void))animation;

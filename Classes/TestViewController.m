@@ -33,28 +33,76 @@
 	label.text = @"Test";
 	[self.view addSubview:label];
 	
-	// Animations with Selectors (iOS 3.2 and lower)
+	// The animation queue is a singleton that prevails through the whole project
 	AIAnimationQueue *animationQueue = [AIAnimationQueue sharedInstance];
+	
+	// Animations with Selectors (iOS 3.2 and lower)
 	[animationQueue addAnimation:@selector(moveDown) target:self];
 	[animationQueue addAnimation:@selector(moveRight) target:self];
 	[animationQueue addAnimation:@selector(moveUp) target:self];
 	[animationQueue addAnimation:@selector(moveLeft) target:self];
+	[animationQueue addAnimation:@selector(samePlace) target:self];
+	
+	// Animations with Selectors and Continuations (iOS 3.2 and lower)
+	[animationQueue addAnimation:@selector(moveDown) target:self continuation:@selector(downContinuation) continuationTarget:self];
+	[animationQueue addAnimation:@selector(moveRight) target:self continuation:@selector(rightContinuation) continuationTarget:self];
+	[animationQueue addAnimation:@selector(moveUp) target:self continuation:@selector(upContinuation) continuationTarget:self];
+	[animationQueue addAnimation:@selector(moveLeft) target:self continuation:@selector(leftContinuation) continuationTarget:self];
+	[animationQueue addAnimation:@selector(samePlace) target:self continuation:@selector(samePlaceContinuation) continuationTarget:self];
 	
 	// Animations with Blocks (iOS 4.0 +)
-	[animationQueue addAnimation:^{ [UIView setAnimationDuration:2.0];
-		label.frame = CGRectMake(0, 400, 100, 40); }];
-	[animationQueue addAnimation:^{ [UIView setAnimationDuration:2.0];
-		label.frame = CGRectMake(220, 400, 100, 40); }];
-	[animationQueue addAnimation:^{ [UIView setAnimationDuration:2.0];
-		label.frame = CGRectMake(220, 0, 100, 40); }];
+	[animationQueue addAnimation:^{ 
+		[UIView setAnimationDuration:2.0];
+		label.frame = CGRectMake(0, 400, 100, 40); 
+	}];
+	[animationQueue addAnimation:^{ 
+		[UIView setAnimationDuration:2.0];
+		label.frame = CGRectMake(220, 400, 100, 40); 
+	}];
+	[animationQueue addAnimation:^{ 
+		[UIView setAnimationDuration:2.0];
+		label.frame = CGRectMake(220, 0, 100, 40); 
+	}];
+	[animationQueue addAnimation:^{ 
+		[UIView setAnimationDuration:2.0];
+		label.frame = CGRectMake(0, 0, 100, 40); 
+	}];
+	[animationQueue addAnimation:^{ 
+		[UIView setAnimationDuration:2.0];
+		label.frame = label.frame; 
+	}];
 	
 	// Animations with Blocks and Continuations (iOS 4.0 +)
-	[animationQueue addAnimation:^{ [UIView setAnimationDuration:2.0];
-		label.frame = CGRectMake(0, 400, 100, 40); } continuation:^{NSLog(@"Done 1");}];
-	[animationQueue addAnimation:^{ [UIView setAnimationDuration:2.0];
-		label.frame = CGRectMake(220, 400, 100, 40); } continuation:^{NSLog(@"Done 2");}];
-	[animationQueue addAnimation:^{ [UIView setAnimationDuration:2.0];
-		label.frame = CGRectMake(220, 0, 100, 40); } continuation:^{NSLog(@"Done 3");}];
+	[animationQueue addAnimation:^{ 
+		[UIView setAnimationDuration:2.0];
+		label.frame = CGRectMake(0, 400, 100, 40); 
+	} continuation:^{ 
+		NSLog(@"Done 1"); 
+	}];
+	[animationQueue addAnimation:^{ 
+		[UIView setAnimationDuration:2.0];
+		label.frame = CGRectMake(220, 400, 100, 40); 
+	} continuation:^{ 
+		NSLog(@"Done 2"); 
+	}];
+	[animationQueue addAnimation:^{ 
+		[UIView setAnimationDuration:2.0];
+		label.frame = CGRectMake(220, 0, 100, 40); 
+	} continuation:^{ 
+		NSLog(@"Done 3"); 
+	}];
+	[animationQueue addAnimation:^{ 
+		[UIView setAnimationDuration:2.0];
+		label.frame = CGRectMake(0, 0, 100, 40); 
+	} continuation:^{ 
+		NSLog(@"Done 4"); 
+	}];
+	[animationQueue addAnimation:^{ 
+		[UIView setAnimationDuration:2.0];
+		label.frame = label.frame; 
+	} continuation:^{ 
+		NSLog(@"Done 5"); 
+	}];
 }
 
 - (void)moveDown {
@@ -62,9 +110,17 @@
 	label.frame = CGRectMake(0, 400, 100, 40);
 }
 
+- (void)downContinuation {
+	NSLog(@"Done down animation");
+}
+
 - (void)moveRight {
 	[UIView setAnimationDuration:2.0];
 	label.frame = CGRectMake(220, 400, 100, 40);
+}
+
+- (void)rightContinuation {
+	NSLog(@"Done right animation");
 }
 
 - (void)moveUp {
@@ -72,9 +128,26 @@
 	label.frame = CGRectMake(220, 0, 100, 40);
 }
 
+- (void)upContinuation {
+	NSLog(@"Done up animation");
+}
+
 - (void)moveLeft {
 	[UIView setAnimationDuration:2.0];
-	label.frame = CGRectMake(220, 0, 100, 40);
+	label.frame = CGRectMake(0, 0, 100, 40);
+}
+
+- (void)leftContinuation {
+	NSLog(@"Done left animation");
+}
+
+- (void)samePlace {
+	[UIView setAnimationDuration:2.0];
+	label.frame = label.frame;
+}
+
+- (void)samePlaceContinuation {
+	NSLog(@"Done same place test");
 }
 
 - (void)didReceiveMemoryWarning {

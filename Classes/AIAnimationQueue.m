@@ -31,7 +31,11 @@
 #pragma mark Selector Animations
 
 - (void)addAnimation:(SEL)selector target:(id)target {
-	AISelectorAnimationObject *aObject = [[AISelectorAnimationObject alloc] initWithTarget:target selector:selector];
+	[self addAnimation:selector target:target continuation:nil continuationTarget:nil];
+}
+
+- (void)addAnimation:(SEL)selector target:(id)target continuation:(SEL)cSelector continuationTarget:(id)cTarget {
+	AISelectorAnimationObject *aObject = [[AISelectorAnimationObject alloc] initWithTarget:target selector:selector continuation:cTarget continuationSelector:cSelector];
 	aObject.delegate = self;
 	[queue addObject:aObject];
 	[aObject release];
@@ -44,13 +48,7 @@
 #pragma mark Block Animations
 
 - (void)addAnimation:(void (^)(void))animation {
-	AIBlockAnimationObject *aObject = [[AIBlockAnimationObject alloc] initWithBlock:animation];
-	aObject.delegate = self;
-	[queue addObject:aObject];
-	[aObject release];
-	if (!animating) {
-		[self nextAnimation];
-	}
+	[self addAnimation:animation continuation:nil];
 }
 
 - (void)addAnimation:(void (^)())animation continuation:(void (^)())continuation {
