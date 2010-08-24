@@ -35,8 +35,10 @@
 	[self selectorTests];
 	[self selectorWithContinuationTests];
 	[self selectorWithArgumentsTests];
+	#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 40000
 	[self blockTests];
 	[self blocksWithContinuationTests];
+	# endif
 }
 
 - (void)selectorTests {
@@ -97,7 +99,7 @@
 	[animationQueue addAnimation:@selector(moveTo:) target:self parameters:parameters];
 }
 
-
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 40000
 - (void)blockTests {
 	NSLog(@"=== Block Tests ===");
 	AIAnimationQueue *animationQueue = [AIAnimationQueue sharedInstance];
@@ -170,7 +172,7 @@
 		NSLog(@"Done 5"); 
 	}];
 }
-
+#endif
 
 - (void)moveTo:(NSValue *)rect {
 	[UIView setAnimationDuration:2.0];
