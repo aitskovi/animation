@@ -14,10 +14,10 @@
 
 #import <Foundation/Foundation.h>
 #import "AISingleton.h"
-#import "AISelectorAnimationObject.h"
-#import "AIBlockAnimationObject.h"
+#import "AISelectorQueueObject.h"
+#import "AIBlockQueueObject.h"
 
-@interface AIAnimationQueue : AISingleton <AIAnimationObjectDelegate> {
+@interface AIAnimationQueue : AISingleton <AIQueueObjectDelegate> {
 	NSMutableArray *queue;
 	BOOL animating;
 }
@@ -28,14 +28,16 @@
 // Selector is the selector for the lies wrapping the animation
 // Target is the object in which that method lies
 - (void)addAnimation:(SEL)selector target:(id)target;
-- (void)addAnimation:(SEL)selector target:(id)target arguments:(NSArray *)arguments;
-- (void)addAnimation:(SEL)selector target:(id)target continuation:(SEL)cSelector continuationTarget:(id)cTarget;
-- (void)addAnimation:(SEL)selector target:(id)target arguments:(NSArray *)arguments continuation:(SEL)cSelector continuationTarget:(id)cTarget continuationArguments:(NSArray *)cArguments;
+- (void)addAnimation:(SEL)selector target:(id)target parameters:(NSArray *)arguments;
+- (void)addComputation:(SEL)selector target:(id)target;
+- (void)addComputation:(SEL)selector target:(id)target parameters:(NSArray *)arguments;
+- (void)addSelector:(SEL)selector target:(id)target parameters:(NSArray *)parameters animation:(BOOL)animation;
 
 // Block based animations
 - (void)addAnimation:(void (^)(void))animation;
-- (void)addAnimation:(void (^)())animation continuation:(void (^)())continuation;
+- (void)addComputation:(void (^)(void))computation;
+- (void)addBlock:(void (^)(void))block animation:(BOOL)animation;
 
-- (void)nextAnimation;
+- (void)next;
 
 @end

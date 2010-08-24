@@ -22,6 +22,7 @@
 - (void)selectorTests;
 - (void)selectorWithArgumentsTests;
 - (void)selectorWithContinuationTests;
-
+- (void)blockTests;
+- (void)blocksWithContinuationTests;
 
 @end

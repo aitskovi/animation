@@ -1,5 +1,5 @@
 //
-//  AIAnimationObject.m
+//  AIAnimationObject.h
 //  Animation
 //
 //  Created by Avi Itskovich on 10-08-07.
@@ -12,19 +12,22 @@
 //  appreciated but not required.
 //
 
-#import "AIAnimationObject.h"
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-@implementation AIAnimationObject
 
-@synthesize delegate;
+@protocol AIQueueObjectDelegate
 
-- (void) play {
-	NSLog(@"Error created base object");
+@required
+- (void)next;
+
+@end
+
+@interface AIQueueObject : NSObject {
+	id <AIQueueObjectDelegate> delegate;
 }
 
-- (void)dealloc {
-	self.delegate = nil;
-	[super dealloc];
-}
+@property (nonatomic, assign) id delegate;
+
+- (void)play;
+- (void)next;
 @end

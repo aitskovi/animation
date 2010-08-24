@@ -31,50 +31,71 @@
 #pragma mark Selector Animations
 
 - (void)addAnimation:(SEL)selector target:(id)target {
-	[self addAnimation:selector target:target continuation:nil continuationTarget:nil];
+	[self addAnimation:selector target:target parameters:nil];
 }
 
-- (void)addAnimation:(SEL)selector target:(id)target continuation:(SEL)cSelector continuationTarget:(id)cTarget {
-	[self addAnimation:selector target:target arguments:nil continuation:cSelector continuationTarget:cTarget continuationArguments:nil];
+- (void)addAnimation:(SEL)selector target:(id)target parameters:(NSArray *)parameters {
+	[self addSelector:selector target:target parameters:parameters animation:YES];
 }
 
-- (void)addAnimation:(SEL)selector target:(id)target arguments:(NSArray *)arguments {
-	[self addAnimation:selector target:target arguments:arguments continuation:nil continuationTarget:nil continuationArguments:nil];
+- (void)addComputation:(SEL)selector target:(id)target {
+	[self addComputation:selector target:target parameters:nil];
 }
 
-- (void)addAnimation:(SEL)selector target:(id)target arguments:(NSArray *)arguments continuation:(SEL)cSelector continuationTarget:(id)cTarget continuationArguments:(NSArray *)cArguments {
-	AISelectorAnimationObject *aObject = [[AISelectorAnimationObject alloc] initWithTarget:target selector:selector arguments:arguments continuation:cTarget continuationSelector:cSelector continuationArguments:cArguments];
+- (void)addComputation:(SEL)selector target:(id)target parameters:(NSArray *)parameters {
+	[self addSelector:selector target:target parameters:parameters animation:NO];
+}
+
+- (void)addSelector:(SEL)selector target:(id)target parameters:(NSArray *)parameters animation:(BOOL)animation {
+	AISelectorQueueObject *aObject = [AISelectorQueueObject alloc];
+	
+	if (animation) 
+		aObject = [aObject initWithAnimation:selector target:target arguments:parameters];
+	else
+		aObject = [aObject initWithComputation:selector target:target arguments:parameters];
+	
 	aObject.delegate = self;
 	[queue addObject:aObject];
 	[aObject release];
 	if (!animating) {
-		[self nextAnimation];
+		[self next];
 	}
+	
 }
+
 
 #pragma mark -
 #pragma mark Block Animations
 
 - (void)addAnimation:(void (^)(void))animation {
-	[self addAnimation:animation continuation:nil];
+	[self addBlock:animation animation:YES];
 }
 
-- (void)addAnimation:(void (^)())animation continuation:(void (^)())continuation {
-	AIBlockAnimationObject *aObject = [[AIBlockAnimationObject alloc] initWithBlock:animation continuation:continuation];
+- (void)addComputation:(void (^)(void))computation {
+	[self addBlock:computation animation:NO];
+}
+
+- (void)addBlock:(void (^)(void))block animation:(BOOL)animation {
+	AIBlockQueueObject *aObject = [AIBlockQueueObject alloc];
+	
+	if (animation) aObject = [aObject initWithAnimation:block];
+	else aObject = [aObject initWithComputation:block];
+	
 	aObject.delegate = self;
 	[queue addObject:aObject];
 	[aObject release];
 	if (!animating) {
-		[self nextAnimation];
+		[self next];
 	}
 }
 
 #pragma mark -
 #pragma mark Queue Management
 
-- (void)nextAnimation {
+- (void)next {
+	NSLog(@"NEXT");
 	if ([queue count] > 0) {
-		AIAnimationObject *animation = [[[queue objectAtIndex:0] retain] autorelease];
+		AIQueueObject *animation = [[[queue objectAtIndex:0] retain] autorelease];
 		
 		// Set boolean and remove before playing because animations where nothing happens
 		// occur instantaneously causing an infinited loop if these are set after play

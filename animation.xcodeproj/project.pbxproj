@@ -13,6 +13,12 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+		FD9D86781224240200B161C8 /* AISelectorQueueObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9D86771224240200B161C8 /* AISelectorQueueObject.m */; };
+		FD9D86791224240200B161C8 /* AISelectorQueueObject.h in Headers */ = {isa = PBXBuildFile; fileRef = FD9D86761224240200B161C8 /* AISelectorQueueObject.h */; };
+		FD9D867A1224240200B161C8 /* AISelectorQueueObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9D86771224240200B161C8 /* AISelectorQueueObject.m */; };
+		FD9D867D1224240F00B161C8 /* AIBlockQueueObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9D867C1224240F00B161C8 /* AIBlockQueueObject.m */; };
+		FD9D867E1224240F00B161C8 /* AIBlockQueueObject.h in Headers */ = {isa = PBXBuildFile; fileRef = FD9D867B1224240F00B161C8 /* AIBlockQueueObject.h */; };
+		FD9D867F1224240F00B161C8 /* AIBlockQueueObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9D867C1224240F00B161C8 /* AIBlockQueueObject.m */; };
 		FDA2816C120F2CC10039A8CD /* AIAnimationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA2816A120F2CC10039A8CD /* AIAnimationQueue.m */; };
 		FDA28172120F2D2D0039A8CD /* AISingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA28171120F2D2D0039A8CD /* AISingleton.m */; };
 		FDA281A1120F2E1A0039A8CD /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA2819F120F2E1A0039A8CD /* TestViewController.m */; };
@@ -20,16 +26,10 @@
 		FDA28201120F32850039A8CD /* AISingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA28171120F2D2D0039A8CD /* AISingleton.m */; };
 		FDA28203120F32850039A8CD /* AIAnimationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA2816A120F2CC10039A8CD /* AIAnimationQueue.m */; };
 		FDA28204120F329D0039A8CD /* AISingleton.h in Headers */ = {isa = PBXBuildFile; fileRef = FDA28170120F2D2D0039A8CD /* AISingleton.h */; };
-		FDA28205120F329E0039A8CD /* AIAnimationObject.h in Headers */ = {isa = PBXBuildFile; fileRef = FDA28167120F2CC10039A8CD /* AIAnimationObject.h */; };
+		FDA28205120F329E0039A8CD /* AIQueueObject.h in Headers */ = {isa = PBXBuildFile; fileRef = FDA28167120F2CC10039A8CD /* AIQueueObject.h */; };
 		FDA28206120F329E0039A8CD /* AIAnimationQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = FDA28169120F2CC10039A8CD /* AIAnimationQueue.h */; };
-		FDA28263120F4DC20039A8CD /* AIBlockAnimationObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA28262120F4DC20039A8CD /* AIBlockAnimationObject.m */; };
-		FDA28264120F4DC20039A8CD /* AIBlockAnimationObject.h in Headers */ = {isa = PBXBuildFile; fileRef = FDA28261120F4DC20039A8CD /* AIBlockAnimationObject.h */; };
-		FDA28265120F4DC20039A8CD /* AIBlockAnimationObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA28262120F4DC20039A8CD /* AIBlockAnimationObject.m */; };
-		FDA28268120F4DDE0039A8CD /* AISelectorAnimationObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA28267120F4DDE0039A8CD /* AISelectorAnimationObject.m */; };
-		FDA28269120F4DDE0039A8CD /* AISelectorAnimationObject.h in Headers */ = {isa = PBXBuildFile; fileRef = FDA28266120F4DDE0039A8CD /* AISelectorAnimationObject.h */; };
-		FDA2826A120F4DDE0039A8CD /* AISelectorAnimationObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA28267120F4DDE0039A8CD /* AISelectorAnimationObject.m */; };
-		FDA2828C120F4FF70039A8CD /* AIAnimationObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA2828B120F4FF70039A8CD /* AIAnimationObject.m */; };
-		FDA2828D120F4FF70039A8CD /* AIAnimationObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA2828B120F4FF70039A8CD /* AIAnimationObject.m */; };
+		FDA2828C120F4FF70039A8CD /* AIQueueObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA2828B120F4FF70039A8CD /* AIQueueObject.m */; };
+		FDA2828D120F4FF70039A8CD /* AIQueueObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA2828B120F4FF70039A8CD /* AIQueueObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,7 +43,11 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* animation_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = animation_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* animation-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "animation-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
-		FDA28167120F2CC10039A8CD /* AIAnimationObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIAnimationObject.h; sourceTree = "<group>"; };
+		FD9D86761224240200B161C8 /* AISelectorQueueObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AISelectorQueueObject.h; sourceTree = "<group>"; };
+		FD9D86771224240200B161C8 /* AISelectorQueueObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AISelectorQueueObject.m; sourceTree = "<group>"; };
+		FD9D867B1224240F00B161C8 /* AIBlockQueueObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIBlockQueueObject.h; sourceTree = "<group>"; };
+		FD9D867C1224240F00B161C8 /* AIBlockQueueObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIBlockQueueObject.m; sourceTree = "<group>"; };
+		FDA28167120F2CC10039A8CD /* AIQueueObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIQueueObject.h; sourceTree = "<group>"; };
 		FDA28169120F2CC10039A8CD /* AIAnimationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIAnimationQueue.h; sourceTree = "<group>"; };
 		FDA2816A120F2CC10039A8CD /* AIAnimationQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIAnimationQueue.m; sourceTree = "<group>"; };
 		FDA28170120F2D2D0039A8CD /* AISingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AISingleton.h; sourceTree = "<group>"; };
@@ -52,11 +56,7 @@
 		FDA2819F120F2E1A0039A8CD /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		FDA281A0120F2E1A0039A8CD /* TestViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestViewController.xib; sourceTree = "<group>"; };
 		FDA281FE120F32580039A8CD /* libanimationQueue.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libanimationQueue.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		FDA28261120F4DC20039A8CD /* AIBlockAnimationObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIBlockAnimationObject.h; sourceTree = "<group>"; };
-		FDA28262120F4DC20039A8CD /* AIBlockAnimationObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIBlockAnimationObject.m; sourceTree = "<group>"; };
-		FDA28266120F4DDE0039A8CD /* AISelectorAnimationObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AISelectorAnimationObject.h; sourceTree = "<group>"; };
-		FDA28267120F4DDE0039A8CD /* AISelectorAnimationObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AISelectorAnimationObject.m; sourceTree = "<group>"; };
-		FDA2828B120F4FF70039A8CD /* AIAnimationObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIAnimationObject.m; sourceTree = "<group>"; };
+		FDA2828B120F4FF70039A8CD /* AIQueueObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIQueueObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,12 +157,12 @@
 		FDA2826B120F4ED20039A8CD /* Animation Objects */ = {
 			isa = PBXGroup;
 			children = (
-				FDA28167120F2CC10039A8CD /* AIAnimationObject.h */,
-				FDA2828B120F4FF70039A8CD /* AIAnimationObject.m */,
-				FDA28266120F4DDE0039A8CD /* AISelectorAnimationObject.h */,
-				FDA28267120F4DDE0039A8CD /* AISelectorAnimationObject.m */,
-				FDA28261120F4DC20039A8CD /* AIBlockAnimationObject.h */,
-				FDA28262120F4DC20039A8CD /* AIBlockAnimationObject.m */,
+				FDA28167120F2CC10039A8CD /* AIQueueObject.h */,
+				FDA2828B120F4FF70039A8CD /* AIQueueObject.m */,
+				FD9D86761224240200B161C8 /* AISelectorQueueObject.h */,
+				FD9D86771224240200B161C8 /* AISelectorQueueObject.m */,
+				FD9D867B1224240F00B161C8 /* AIBlockQueueObject.h */,
+				FD9D867C1224240F00B161C8 /* AIBlockQueueObject.m */,
 			);
 			name = "Animation Objects";
 			sourceTree = "<group>";
@@ -175,10 +175,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDA28204120F329D0039A8CD /* AISingleton.h in Headers */,
-				FDA28205120F329E0039A8CD /* AIAnimationObject.h in Headers */,
+				FDA28205120F329E0039A8CD /* AIQueueObject.h in Headers */,
 				FDA28206120F329E0039A8CD /* AIAnimationQueue.h in Headers */,
-				FDA28264120F4DC20039A8CD /* AIBlockAnimationObject.h in Headers */,
-				FDA28269120F4DDE0039A8CD /* AISelectorAnimationObject.h in Headers */,
+				FD9D86791224240200B161C8 /* AISelectorQueueObject.h in Headers */,
+				FD9D867E1224240F00B161C8 /* AIBlockQueueObject.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,9 +259,9 @@
 				FDA2816C120F2CC10039A8CD /* AIAnimationQueue.m in Sources */,
 				FDA28172120F2D2D0039A8CD /* AISingleton.m in Sources */,
 				FDA281A1120F2E1A0039A8CD /* TestViewController.m in Sources */,
-				FDA28263120F4DC20039A8CD /* AIBlockAnimationObject.m in Sources */,
-				FDA28268120F4DDE0039A8CD /* AISelectorAnimationObject.m in Sources */,
-				FDA2828C120F4FF70039A8CD /* AIAnimationObject.m in Sources */,
+				FDA2828C120F4FF70039A8CD /* AIQueueObject.m in Sources */,
+				FD9D86781224240200B161C8 /* AISelectorQueueObject.m in Sources */,
+				FD9D867D1224240F00B161C8 /* AIBlockQueueObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,9 +271,9 @@
 			files = (
 				FDA28201120F32850039A8CD /* AISingleton.m in Sources */,
 				FDA28203120F32850039A8CD /* AIAnimationQueue.m in Sources */,
-				FDA28265120F4DC20039A8CD /* AIBlockAnimationObject.m in Sources */,
-				FDA2826A120F4DDE0039A8CD /* AISelectorAnimationObject.m in Sources */,
-				FDA2828D120F4FF70039A8CD /* AIAnimationObject.m in Sources */,
+				FDA2828D120F4FF70039A8CD /* AIQueueObject.m in Sources */,
+				FD9D867A1224240200B161C8 /* AISelectorQueueObject.m in Sources */,
+				FD9D867F1224240F00B161C8 /* AIBlockQueueObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,7 +303,7 @@
 				GCC_PREFIX_HEADER = animation_Prefix.pch;
 				INFOPLIST_FILE = "animation-Info.plist";
 				PRODUCT_NAME = animation;
-				SDKROOT = iphoneos3.2;
+				SDKROOT = iphoneos4.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
