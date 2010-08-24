@@ -93,7 +93,6 @@
 #pragma mark Queue Management
 
 - (void)next {
-	NSLog(@"NEXT");
 	if ([queue count] > 0) {
 		AIQueueObject *animation = [[[queue objectAtIndex:0] retain] autorelease];
 		
