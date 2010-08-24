@@ -40,6 +40,7 @@
 }
 
 - (void)selectorTests {
+	NSLog(@"=== Selector Tests ===");
 	AIAnimationQueue *animationQueue = [AIAnimationQueue sharedInstance];
 	
 	// Animations with Selectors (iOS 3.2 and lower)
@@ -51,6 +52,7 @@
 }
 
 - (void)selectorWithContinuationTests {
+	NSLog(@"=== Selector With Continuation Tests ===");
 	AIAnimationQueue *animationQueue = [AIAnimationQueue sharedInstance];
 	
 	// Animations with Selectors and Continuations (iOS 3.2 and lower)
@@ -61,7 +63,7 @@
 	[animationQueue addComputation:@selector(rightContinuation) target:self];
 	
 	[animationQueue addAnimation:@selector(moveUp) target:self];
-	[animationQueue addComputation:@selector(downContinuation)	target:self];
+	[animationQueue addComputation:@selector(upContinuation)	target:self];
 	
 	[animationQueue addAnimation:@selector(moveLeft) target:self];
 	[animationQueue addComputation:@selector(leftContinuation)	target:self];
@@ -71,17 +73,33 @@
 }
 
 - (void)selectorWithArgumentsTests {
+	NSLog(@"=== Selector With Arguments Tests ===");
 	AIAnimationQueue *animationQueue = [AIAnimationQueue sharedInstance];
 	
-	NSValue *value = [NSValue valueWithCGRect:CGRectMake(0, 400, 100, 40)];
-	NSNumber *number = [NSNumber numberWithInt:2];
-	NSArray *testArray = [NSArray arrayWithObjects:value, number, nil];
-	[animationQueue addAnimation:@selector(moveTo:time:) target:self parameters:testArray];
-	NSLog(@"ADDED argument");
+	NSValue *rect = [NSValue valueWithCGRect:CGRectMake(0, 400, 100, 40)];
+	NSArray *parameters = [NSArray arrayWithObject:rect];
+	[animationQueue addAnimation:@selector(moveTo:) target:self parameters:parameters];
+	
+	rect = [NSValue valueWithCGRect:CGRectMake(220, 400, 100, 40)];
+	parameters = [NSArray arrayWithObject:rect];
+	[animationQueue addAnimation:@selector(moveTo:) target:self parameters:parameters];
+	
+	rect = [NSValue valueWithCGRect:CGRectMake(220, 0, 100, 40)];
+	parameters = [NSArray arrayWithObject:rect];
+	[animationQueue addAnimation:@selector(moveTo:) target:self parameters:parameters];
+	
+	rect = [NSValue valueWithCGRect:CGRectMake(0, 0, 100, 40)];
+	parameters = [NSArray arrayWithObject:rect];
+	[animationQueue addAnimation:@selector(moveTo:) target:self parameters:parameters];
+	
+	rect = [NSValue valueWithCGRect:CGRectMake(0, 0, 100, 40)];
+	parameters = [NSArray arrayWithObject:rect];
+	[animationQueue addAnimation:@selector(moveTo:) target:self parameters:parameters];
 }
 
 
 - (void)blockTests {
+	NSLog(@"=== Block Tests ===");
 	AIAnimationQueue *animationQueue = [AIAnimationQueue sharedInstance];
 	
 	// Animations with Blocks (iOS 4.0 +)
@@ -108,6 +126,7 @@
 }
 
 - (void)blocksWithContinuationTests {
+	NSLog(@"=== Blocks with Continuation Tests ===");
 	AIAnimationQueue *animationQueue = [AIAnimationQueue sharedInstance];
 	
 	// Animations with Blocks and Continuations (iOS 4.0 +)
@@ -155,11 +174,6 @@
 
 - (void)moveTo:(NSValue *)rect {
 	[UIView setAnimationDuration:2.0];
-	label.frame = [rect CGRectValue];
-}
-
-- (void)moveTo:(NSValue *)rect time:(NSNumber *)time {
-	[UIView setAnimationDuration:[time intValue]];
 	label.frame = [rect CGRectValue];
 }
 
