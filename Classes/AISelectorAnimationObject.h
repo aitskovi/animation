@@ -17,6 +17,7 @@
 	
 	SEL cSelector;
 	id cTarget;
+	NSArray *cArguments;
 }
 
 @property (nonatomic, retain) id target;
@@ -25,8 +26,10 @@
 
 @property (nonatomic, retain) id cTarget;
 @property (nonatomic) SEL cSelector;
+@property (nonatomic, retain) NSArray *cArguments;
 
 - (id)initWithTarget:(id)animationTarget selector:(SEL)animationSelector;
 - (id)initWithTarget:(id)animationTarget selector:(SEL)animationSelector arguments:(NSArray *)argumentArray;
 - (id)initWithTarget:(id)animationTarget selector:(SEL)animationSelector continuation:(id)continuationTarget continuationSelector:(SEL)continuationSelector;
+- (id)initWithTarget:(id)animationTarget selector:(SEL)animationSelector arguments:(NSArray *)argumentArray continuation:(id)continuationTarget continuationSelector:(SEL)continuationSelector continuationArguments:(NSArray *)continuationArguments;
 @end

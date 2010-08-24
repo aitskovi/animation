@@ -19,4 +19,9 @@
 	UILabel *label;
 }
 
+- (void)selectorTests;
+- (void)selectorWithArgumentsTests;
+- (void)selectorWithContinuationTests;
+
+
 @end

@@ -16,23 +16,28 @@
 
 @synthesize cTarget;
 @synthesize cSelector;
+@synthesize cArguments;
 
 - (id)initWithTarget:(id)animationTarget selector:(SEL)animationSelector {
 	return [self initWithTarget:animationTarget selector:animationSelector continuation:nil continuationSelector:nil];
 }
 
 - (id)initWithTarget:(id)animationTarget selector:(SEL)animationSelector arguments:(NSArray *)argumentArray {
-	self = [self initWithTarget:animationTarget selector:animationSelector];
-	self.arguments = argumentArray;
-	return self;
+	return [self initWithTarget:animationTarget selector:animationSelector arguments:argumentArray continuation:nil continuationSelector:nil continuationArguments:nil];
 }
 
 - (id)initWithTarget:(id)animationTarget selector:(SEL)animationSelector continuation:(id)continuationTarget continuationSelector:(SEL)continuationSelector {
+	return [self initWithTarget:animationTarget selector:animationSelector arguments:nil continuation:continuationTarget continuationSelector:continuationSelector continuationArguments:nil];
+}
+
+- (id)initWithTarget:(id)animationTarget selector:(SEL)animationSelector arguments:(NSArray *)argumentArray continuation:(id)continuationTarget continuationSelector:(SEL)continuationSelector continuationArguments:(NSArray *)continuationArguments {
 	if ((self = [super init])) {
-		self.target = animationTarget;
-		self.selector= animationSelector;
-		self.cTarget = continuationTarget;
-		self.cSelector = continuationSelector;
+		target = [animationTarget retain];
+		selector = animationSelector;
+		arguments = [argumentArray retain];
+		cTarget = [continuationTarget retain];
+		cSelector = continuationSelector;
+		cArguments = [continuationArguments retain];
 	}
 	return self;
 }
@@ -45,6 +50,21 @@
 	
 	int i = 2;
 	for (id argument in arguments) {
+		[aInvocation setArgument:&argument atIndex:i];
+		i++;
+	}
+	
+	[aInvocation invoke];
+}
+
+- (void)performContinuation {
+	NSMethodSignature *methodSig = [[cTarget class] instanceMethodSignatureForSelector:cSelector];
+	NSInvocation *aInvocation = [NSInvocation invocationWithMethodSignature:methodSig];
+	[aInvocation setSelector:cSelector];
+	[aInvocation setTarget:cTarget];
+	
+	int i = 2;
+	for (id argument in cArguments) {
 		[aInvocation setArgument:&argument atIndex:i];
 		i++;
 	}
@@ -65,7 +85,7 @@
 - (void)animationEnded {
 	if (cSelector != nil) {
 		if ([self.cTarget respondsToSelector:self.cSelector]) {
-			[self.cTarget performSelector:self.cSelector];
+			[self performContinuation];
 		}
 	}
 	
@@ -77,8 +97,10 @@
 - (void)dealloc {
 	self.target = nil;
 	self.selector = nil;
+	self.arguments = nil;
 	self.cTarget = nil;
 	self.cSelector = nil;
+	self.cArguments = nil;
 	[super dealloc];
 }
 

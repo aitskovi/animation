@@ -32,6 +32,8 @@
 	label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 40)];
 	label.text = @"Test";
 	[self.view addSubview:label];
+	[self selectorTests];
+	[self selectorWithContinuationTests];
 	[self selectorWithArgumentsTests];
 }
 

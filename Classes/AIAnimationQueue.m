@@ -35,17 +35,15 @@
 }
 
 - (void)addAnimation:(SEL)selector target:(id)target continuation:(SEL)cSelector continuationTarget:(id)cTarget {
-	AISelectorAnimationObject *aObject = [[AISelectorAnimationObject alloc] initWithTarget:target selector:selector continuation:cTarget continuationSelector:cSelector];
-	aObject.delegate = self;
-	[queue addObject:aObject];
-	[aObject release];
-	if (!animating) {
-		[self nextAnimation];
-	}
+	[self addAnimation:selector target:target arguments:nil continuation:cSelector continuationTarget:cTarget continuationArguments:nil];
 }
 
 - (void)addAnimation:(SEL)selector target:(id)target arguments:(NSArray *)arguments {
-	AISelectorAnimationObject *aObject = [[AISelectorAnimationObject alloc] initWithTarget:target selector:selector arguments:arguments];
+	[self addAnimation:selector target:target arguments:arguments continuation:nil continuationTarget:nil continuationArguments:nil];
+}
+
+- (void)addAnimation:(SEL)selector target:(id)target arguments:(NSArray *)arguments continuation:(SEL)cSelector continuationTarget:(id)cTarget continuationArguments:(NSArray *)cArguments {
+	AISelectorAnimationObject *aObject = [[AISelectorAnimationObject alloc] initWithTarget:target selector:selector arguments:arguments continuation:cTarget continuationSelector:cSelector continuationArguments:cArguments];
 	aObject.delegate = self;
 	[queue addObject:aObject];
 	[aObject release];
