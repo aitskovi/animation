@@ -44,6 +44,16 @@
 	}
 }
 
+- (void)addAnimation:(SEL)selector target:(id)target arguments:(NSArray *)arguments {
+	AISelectorAnimationObject *aObject = [[AISelectorAnimationObject alloc] initWithTarget:target selector:selector arguments:arguments];
+	aObject.delegate = self;
+	[queue addObject:aObject];
+	[aObject release];
+	if (!animating) {
+		[self nextAnimation];
+	}
+}
+
 #pragma mark -
 #pragma mark Block Animations
 

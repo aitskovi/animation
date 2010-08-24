@@ -32,8 +32,10 @@
 	label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 40)];
 	label.text = @"Test";
 	[self.view addSubview:label];
-	
-	// The animation queue is a singleton that prevails through the whole project
+	[self selectorWithArgumentsTests];
+}
+
+- (void)selectorTests {
 	AIAnimationQueue *animationQueue = [AIAnimationQueue sharedInstance];
 	
 	// Animations with Selectors (iOS 3.2 and lower)
@@ -41,7 +43,11 @@
 	[animationQueue addAnimation:@selector(moveRight) target:self];
 	[animationQueue addAnimation:@selector(moveUp) target:self];
 	[animationQueue addAnimation:@selector(moveLeft) target:self];
-	[animationQueue addAnimation:@selector(samePlace) target:self];
+	[animationQueue addAnimation:@selector(samePlace) target:self];	
+}
+
+- (void)selectorWithContinuationTests {
+	AIAnimationQueue *animationQueue = [AIAnimationQueue sharedInstance];
 	
 	// Animations with Selectors and Continuations (iOS 3.2 and lower)
 	[animationQueue addAnimation:@selector(moveDown) target:self continuation:@selector(downContinuation) continuationTarget:self];
@@ -49,7 +55,21 @@
 	[animationQueue addAnimation:@selector(moveUp) target:self continuation:@selector(upContinuation) continuationTarget:self];
 	[animationQueue addAnimation:@selector(moveLeft) target:self continuation:@selector(leftContinuation) continuationTarget:self];
 	[animationQueue addAnimation:@selector(samePlace) target:self continuation:@selector(samePlaceContinuation) continuationTarget:self];
+}
+
+- (void)selectorWithArgumentsTests {
+	AIAnimationQueue *animationQueue = [AIAnimationQueue sharedInstance];
 	
+	NSValue *value = [NSValue valueWithCGRect:CGRectMake(0, 400, 100, 40)];
+	NSNumber *number = [NSNumber numberWithInt:2];
+	NSArray *testArray = [NSArray arrayWithObjects:value, number, nil];
+	[animationQueue addAnimation:@selector(moveTo:time:) target:self arguments:testArray];
+	NSLog(@"ADDED argument");
+}
+
+/*
+- (void)blockTests {
+	AIAnimationQueue *animationQueue = [AIAnimationQueue sharedInstance];
 	
 	// Animations with Blocks (iOS 4.0 +)
 	[animationQueue addAnimation:^{ 
@@ -72,6 +92,10 @@
 		[UIView setAnimationDuration:2.0];
 		label.frame = label.frame; 
 	}];
+}
+
+- (void)blocksWithContinuationTests {
+	AIAnimationQueue *animationQueue = [AIAnimationQueue sharedInstance];
 	
 	// Animations with Blocks and Continuations (iOS 4.0 +)
 	[animationQueue addAnimation:^{ 
@@ -104,7 +128,17 @@
 	} continuation:^{ 
 		NSLog(@"Done 5"); 
 	}];
-	
+}
+*/
+
+- (void)moveTo:(NSValue *)rect {
+	[UIView setAnimationDuration:2.0];
+	label.frame = [rect CGRectValue];
+}
+
+- (void)moveTo:(NSValue *)rect time:(NSNumber *)time {
+	[UIView setAnimationDuration:[time intValue]];
+	label.frame = [rect CGRectValue];
 }
 
 - (void)moveDown {
