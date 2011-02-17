@@ -92,6 +92,24 @@
 #pragma mark -
 #pragma mark Queue Management
 
+- (void)clear {
+    [queue removeAllObjects];
+}
+
+- (void)removeObjectsOfType:(Class)classType {
+    for (int i = 0; i < [queue count]; i++) {
+        id queueObject = [queue objectAtIndex:i];
+        if ([queueObject isKindOfClass:classType]) {
+            [queue removeObjectAtIndex:i];
+            i--;
+        }
+    }
+}
+
+- (NSUInteger)count {
+    return [queue count];
+}
+
 - (void)next {
 	if ([queue count] > 0) {
 		AIQueueObject *animation = [[[queue objectAtIndex:0] retain] autorelease];

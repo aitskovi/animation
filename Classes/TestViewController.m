@@ -38,6 +38,7 @@
 	#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 40000
 	[self blockTests];
 	[self blocksWithContinuationTests];
+    [self objectRemovalTests];
 	# endif
 }
 
@@ -172,8 +173,35 @@
 		NSLog(@"Done 5"); 
 	}];
 }
-#endif
 
+- (void)objectRemovalTests {
+    NSLog(@"=== Object Removal Tests ===");
+    AIAnimationQueue *animationQueue = [AIAnimationQueue sharedInstance];
+
+    for (int i = 0; i < 5; i++) {
+        [animationQueue addAnimation:^{
+            [UIView setAnimationDuration:5.0];
+            label.frame = label.frame;
+        }];
+        [animationQueue addComputation:^{
+            NSLog(@"Computation");
+        }];
+    }
+    [animationQueue clear];
+    NSAssert([animationQueue count] == 0, @"Clear didn't remove all parts");
+
+    for (int i = 0; i < 5; i++) {
+        [animationQueue addAnimation:^{
+            [UIView setAnimationDuration:5.0];
+            label.frame = CGRectMake(0, 0, 200, 200);
+        }];
+        [animationQueue addComputation:@selector(downContinuation) target:self];
+    }
+    [animationQueue removeObjectsOfType:[AISelectorQueueObject class]];
+    NSAssert([animationQueue count] == 5, @"Remove object types failed");
+}
+
+#endif
 - (void)moveTo:(NSValue *)rect {
 	[UIView setAnimationDuration:2.0];
 	label.frame = [rect CGRectValue];

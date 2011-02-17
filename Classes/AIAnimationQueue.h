@@ -38,6 +38,12 @@
 - (void)addComputation:(void (^)(void))computation;
 - (void)addBlock:(void (^)(void))block animation:(BOOL)animation;
 
+// Queue Management
+- (void)clear;
+- (void)removeObjectsOfType:(Class)classType;
+// Returns the number of animations still left in the queue
+// A currently running animation does not count as being the queue
+- (NSUInteger)count;
 - (void)next;
 
 @end

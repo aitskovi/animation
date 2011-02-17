@@ -24,5 +24,6 @@
 - (void)selectorWithContinuationTests;
 - (void)blockTests;
 - (void)blocksWithContinuationTests;
+- (void)objectRemovalTests;
 
 @end
