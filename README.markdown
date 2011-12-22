@@ -13,21 +13,25 @@ Instructions
 
 Packing the Animation/Computation:
 When packing the animation make sure to leave out
-	[UIView beginAnimation:(NSString *)animationID context:(void *)context];
-	[UIView setAnimationDelegate:(id)target];
-	[UIView setAnimationDidStopSelector:(SEL)selector];
-	[UIView commitAnimation];
+
+  	[UIView beginAnimation:(NSString *)animationID context:(void *)context];
+  	[UIView setAnimationDelegate:(id)target];
+  	[UIView setAnimationDidStopSelector:(SEL)selector];
+  	[UIView commitAnimation];
 
 You should end-up with something like this:	
-	- (void)animation {
-		[UIView setAnimationDuration:2.0];
-		label.frame = CGRectMake(0,0,0,0);
-	}
+
+  	- (void)animation {
+  		[UIView setAnimationDuration:2.0];
+  		label.frame = CGRectMake(0,0,0,0);
+  	}
+  	
 or in block form:
-	void(^block)(void) = : {
-		[UIView setAnimationDuration:2.0];
-		[label.frame = CGRectMake(0,0,0,0)];
-	}
+
+  	void(^block)(void) = : {
+  		[UIView setAnimationDuration:2.0];
+  		[label.frame = CGRectMake(0,0,0,0)];
+  	}
 
 Getting the AIAnimationQeue object:
 
