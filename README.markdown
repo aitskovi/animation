@@ -44,6 +44,7 @@ Adding a selector-based animation:
 	[aQueue addAnimation:selector target:target];
 
 Adding a block-based animation
+
 	void(^block)(void) = animation;
 	[aQueue addAnimation:block];
 
