@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Animation by aitskovi</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Animation</h1>
+        <p>An Animation Queue for iOS</p>
+
+        <p class="view"><a href="https://github.com/aitskovi/animation">View the Project on GitHub <small>aitskovi/animation</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/aitskovi/animation/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/aitskovi/animation/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/aitskovi/animation">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>AIAnimationQueue</h1>
+
+<p>An animation queue for UIView animations in Objective C</p>
+
+<h2>Overview</h2>
+
+<p>AIAnimationQueue is a singleton that allows sequencing of code execution. AIAnimationQueue supports adding both animations and computations to the queue. The actions added to the queue will be performed sequentially. AIAnimationQueue supports passing code packed in both method and block forms. In addition, it also supports using arguments when passing a method (selector). Computation can be queued and used in exchange for losing the right to specify a didStopSelector in the animation.</p>
+
+<h2>Instructions</h2>
+
+<p>Packing the Animation/Computation:
+When packing the animation make sure to leave out</p>
+
+<pre><code>[UIView beginAnimation:(NSString *)animationID context:(void *)context];
+[UIView setAnimationDelegate:(id)target];
+[UIView setAnimationDidStopSelector:(SEL)selector];
+[UIView commitAnimation];
+</code></pre>
+
+<p>You should end-up with something like this: </p>
+
+<pre><code>- (void)animation {
+    [UIView setAnimationDuration:2.0];
+    label.frame = CGRectMake(0,0,0,0);
+}
+</code></pre>
+
+<p>or in block form:</p>
+
+<pre><code>void(^block)(void) = : {
+    [UIView setAnimationDuration:2.0];
+    [label.frame = CGRectMake(0,0,0,0)];
+}
+</code></pre>
+
+<p>Getting the AIAnimationQeue object:</p>
+
+<pre><code>AIAnimationQueue *aQueue = [AIAnimationQueue sharedInstance];
+</code></pre>
+
+<p>Adding a selector-based animation:</p>
+
+<pre><code>SEL selector = @selector(animation);
+id target = self;
+[aQueue addAnimation:selector target:target];
+</code></pre>
+
+<p>Adding a block-based animation</p>
+
+<pre><code>void(^block)(void) = animation;
+[aQueue addAnimation:block];
+</code></pre>
+
+<p>Computations are added in much the same way except instead of using the addAnimation methods you would use the addComputation methods which accept the same parameters. AIAnimationQueue also supports passing parametrized selectors with examples available in TestViewController.m.</p>
+
+<h2>Compatibility</h2>
+
+<ul>
+<li>AIAnimationQueue supports only selector based animations and computations in iOS 3.2 and lower</li>
+<li>AIAnimationQueue supports both selector based and block based animations and computations in iOS 4.0+</li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/aitskovi">aitskovi</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
